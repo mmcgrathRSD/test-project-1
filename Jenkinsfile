@@ -17,7 +17,7 @@ pipeline {
 		stage('Build Docker') {
 			steps {
 				echo 'Test Docker is installed:.'
-				sh 'docker info'
+				sh 'sudo docker info'
 			}
 		}
 
