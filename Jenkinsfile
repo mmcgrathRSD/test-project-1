@@ -38,7 +38,7 @@ pipeline {
 			'''
 		}
 	}
-	
+
 	stage('Pull Docker Container') {
 		steps {
 			//TODO: Build Container
@@ -50,14 +50,14 @@ pipeline {
 	stage('Build Docker Container') {
 		steps {
 			echo 'Building.'
-			sh 'sudo docker build -t my-php-app . '
+			sh 'sudo docker build -t $DOCKER_IMAGE_NAME . '
 		}
 	}
 
 	stage('Execute Containerr') {
 		steps {
 			echo 'Executing PHP Script'
-			sh 'sudo docker run -i --rm --name my-running-app my-php-app'
+			sh 'sudo docker run -i --rm --name my-running-app $DOCKER_IMAGE_NAME'
 		}
 	}
 		
