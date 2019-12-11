@@ -5,6 +5,7 @@ pipeline {
 	environment {
 		DOCKER_HOST = "hub.docker.com/"
 		DOCKER_IMAGE = "mokeseven7/php-cli:latest"
+		DOCKER_IMAGE_NAME = 'my-php-app'
 	}
 
 	agent any
@@ -34,8 +35,15 @@ pipeline {
 		stage('Remove Old Image') {
 			steps {
 				echo 'Removing old container.'
-				sh 'sudo docker stop my-php-app'
-				sh 'sudo docker rm -f my-php-app'
+				sh ''''
+				if [ ! "$(sudo docker ps -q -f name=$DOCKER_IMAGE_NAME)" ]; then
+					if [ "$(sudo docker ps -aq -f status=exited -f name=$DOCKER_IMAGE_NAME)" ]; then
+						# cleanup
+						sudo stop $DOCKER_IMAGE_NAME
+						sudo docker rm $DOCKER_IMAGE_NAME
+					fi
+				fi
+				''''
 			}
 		}
 
