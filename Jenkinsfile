@@ -31,14 +31,14 @@ pipeline {
 		stage('Build Docker Container') {
 			steps {
 				echo 'Building.'
-				sh 'docker build -t my-php-app '
+				sh 'sudo docker build -t my-php-app '
 			}
 		}
 
 		stage('Execute Containerr') {
 			steps {
 				echo 'Executing PHP Script'
-				sh 'docker run -it --rm --name my-running-app my-php-app'
+				sh 'sudo docker run -it --rm --name my-running-app my-php-app'
 			}
 		}
 		
