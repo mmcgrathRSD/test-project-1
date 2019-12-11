@@ -14,16 +14,16 @@ pipeline {
 			}
 		}
 
-		stage('Build Docker') {
+		stage('Test Docker is installed...') {
 			steps {
-				echo 'Test Docker is installed:.'
 				sh 'sudo docker info'
 			}
 		}
 
-		stage('Test') {
+		stage('Pull Docker Container') {
 			steps {
-				echo 'Testing..'
+				sh 'export PWD=`pwd`'
+				sh 'ls -la'
 			}
 		}
 
