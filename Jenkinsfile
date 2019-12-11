@@ -1,4 +1,9 @@
 pipeline {
+	environment {
+		DOCKER_HOST = "https://hub.docker.com/"
+		DOCKER_IMAGE = "mokeseven7/php-cli:latest"
+	}
+
 	agent any
 
 	stages {
@@ -9,9 +14,10 @@ pipeline {
 			}
 		}
 
-		stage('Build') {
+		stage('Build Docker') {
 			steps {
-				echo 'Building..'
+				echo 'Test Docker is installed:.'
+				sh 'docker info'
 			}
 		}
 
