@@ -234,4 +234,4 @@ USER www-data
 COPY . /var/www
 WORKDIR /var/www/src
 
-CMD [ "php", "./app.php" ]
+CMD [ "php", "./app.php", "argument" ]
