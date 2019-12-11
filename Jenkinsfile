@@ -27,6 +27,14 @@ pipeline {
 				sh 'ls -la'
 			}
 		}
+		//Todo, do this dynamically
+		stage('Build Docker Container') {
+			steps {
+				echo 'Removing old container.'
+				sh 'docker stop my-php-app'
+				sh 'docker rm -f my-php-app'
+			}
+		}
 
 		stage('Build Docker Container') {
 			steps {
@@ -38,7 +46,7 @@ pipeline {
 		stage('Execute Containerr') {
 			steps {
 				echo 'Executing PHP Script'
-				sh 'sudo docker run -it --rm --name my-running-app my-php-app'
+				sh 'sudo docker run -i --rm --name my-running-app my-php-app'
 			}
 		}
 		
