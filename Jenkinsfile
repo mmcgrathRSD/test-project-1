@@ -35,7 +35,7 @@ pipeline {
 		stage('Remove Old Image') {
 			steps {
 				echo 'Removing old container.'
-				sh ''''
+				sh '''
 				if [ ! "$(sudo docker ps -q -f name=$DOCKER_IMAGE_NAME)" ]; then
 					if [ "$(sudo docker ps -aq -f status=exited -f name=$DOCKER_IMAGE_NAME)" ]; then
 						# cleanup
@@ -43,7 +43,7 @@ pipeline {
 						sudo docker rm $DOCKER_IMAGE_NAME
 					fi
 				fi
-				''''
+				'''
 			}
 		}
 
