@@ -1,26 +1,33 @@
-node {
-	checkout scm
+pipeline {
+	agent any
 
-	pipeline {
-		agent any
-		stages {
-			stage('Build') {
-				steps {
-					echo 'Building..'
-				}
-			}
-			stage('Test') {
-				steps {
-					echo 'Testing..'
-				}
-			}
-			stage('Deploy') {
-				steps {
-					echo 'Deploying....'
-				}
+	stages {
+	
+	stage('Checkout') {
+			steps {
+				checkout scm
 			}
 		}
 
+		stage('Build') {
+			steps {
+				echo 'Building..'
+			}
+		}
+
+		stage('Test') {
+			steps {
+				echo 'Testing..'
+			}
+		}
+
+		stage('Deploy') {
+			steps {
+				echo 'Deploying....'
+			}
+		}
+		
 	}
 
 }
+
