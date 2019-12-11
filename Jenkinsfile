@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-		DOCKER_HOST = "https://hub.docker.com/"
+		DOCKER_HOST = "hub.docker.com/"
 		DOCKER_IMAGE = "mokeseven7/php-cli:latest"
 	}
 
