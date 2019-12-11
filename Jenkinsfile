@@ -28,7 +28,7 @@ pipeline {
 			}
 		}
 		//Todo, do this dynamically
-		stage('Build Docker Container') {
+		stage('Remove Old Image') {
 			steps {
 				echo 'Removing old container.'
 				sh 'docker stop my-php-app'
