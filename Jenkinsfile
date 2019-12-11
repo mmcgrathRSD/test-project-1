@@ -13,55 +13,54 @@ pipeline {
 	stages {
 	
 	stage('Checkout') {
-			steps {
-				checkout scm
-			}
+		steps {
+			checkout scm
 		}
-
-		stage('Test Docker is installed...') {
-			steps {
-				sh 'sudo docker info'
-			}
-		}
-
-		stage('Pull Docker Container') {
-			steps {
-				//TODO: Build Container
-				sh 'export PWD=`pwd`'
-				sh 'ls -la'
-			}
-		}
-		//Todo, do this dynamically
-		stage('Remove Old Image') {
-			steps {
-				echo 'Removing old container.'
-				sh '''
-				if [ ! "$(sudo docker ps -q -f name=$DOCKER_IMAGE_NAME)" ]; then
-					if [ "$(sudo docker ps -aq -f status=exited -f name=$DOCKER_IMAGE_NAME)" ]; then
-						# cleanup
-						sudo stop $DOCKER_IMAGE_NAME
-						sudo docker rm $DOCKER_IMAGE_NAME
-					fi
-				fi
-				'''
-			}
-		}
-
-		stage('Build Docker Container') {
-			steps {
-				echo 'Building.'
-				sh 'sudo docker build -t my-php-app . '
-			}
-		}
-
-		stage('Execute Containerr') {
-			steps {
-				echo 'Executing PHP Script'
-				sh 'sudo docker run -i --rm --name my-running-app my-php-app'
-			}
-		}
-		
 	}
 
+	stage('Test Docker is installed...') {
+		steps {
+			sh 'sudo docker info'
+		}
+	}
+
+	stage('Remove Old Image') {
+		steps {
+			echo 'Removing old container.'
+			sh '''
+			if [ ! "$(sudo docker ps -q -f name=$DOCKER_IMAGE_NAME)" ]; then
+				if [ "$(sudo docker ps -aq -f status=exited -f name=$DOCKER_IMAGE_NAME)" ]; then
+					# cleanup
+					sudo stop $DOCKER_IMAGE_NAME
+					sudo docker rm $DOCKER_IMAGE_NAME
+				fi
+			fi
+			'''
+		}
+	}
+	
+	stage('Pull Docker Container') {
+		steps {
+			//TODO: Build Container
+			sh 'export PWD=`pwd`'
+			sh 'ls -la'
+		}
+	}
+
+	stage('Build Docker Container') {
+		steps {
+			echo 'Building.'
+			sh 'sudo docker build -t my-php-app . '
+		}
+	}
+
+	stage('Execute Containerr') {
+		steps {
+			echo 'Executing PHP Script'
+			sh 'sudo docker run -i --rm --name my-running-app my-php-app'
+		}
+	}
+		
+	}
 }
 
