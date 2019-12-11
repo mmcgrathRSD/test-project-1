@@ -1,3 +1,6 @@
+//Todos: 
+//1. Fix perms on server so docker commands dont need to run with sudo
+
 pipeline {
 	environment {
 		DOCKER_HOST = "hub.docker.com/"
@@ -31,8 +34,8 @@ pipeline {
 		stage('Remove Old Image') {
 			steps {
 				echo 'Removing old container.'
-				sh 'docker stop my-php-app'
-				sh 'docker rm -f my-php-app'
+				sh 'sudo docker stop my-php-app'
+				sh 'sudo docker rm -f my-php-app'
 			}
 		}
 
