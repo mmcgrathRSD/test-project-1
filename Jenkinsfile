@@ -31,7 +31,7 @@ pipeline {
 		stage('Build Docker Container') {
 			steps {
 				echo 'Building.'
-				sh 'sudo docker build -t my-php-app '
+				sh 'sudo docker build -t my-php-app . '
 			}
 		}
 
